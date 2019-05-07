@@ -1,6 +1,6 @@
 const model = require('../models/supermarkets');
 const SuperMarket = model.superMarketSchema();
-const { uploadFile } = require('../services/s3service');
+const { uploadPhoto, findPhotoByKey, deletePhotoByKey } = require('../services/s3service');
 
 const createSuperMarket = (req, res) => {
     const { name, description, location, photo } = req.body;

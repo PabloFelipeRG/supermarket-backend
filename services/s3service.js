@@ -8,11 +8,11 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const uploadFile = (file, superMarketId) => {
+const uploadPhoto = (file, superMarketId) => {
     let params = {
         Bucket: BUCKET_NAME,
-        Body: 'file.txt',
-        Key: `${superMarketId}/`
+        Body: file,
+        Key: `${superMarketId}`
     };
 
     s3.upload(params, (err, data) => {
@@ -24,8 +24,44 @@ const uploadFile = (file, superMarketId) => {
             console.log("Uploaded in:", data.Location);
         }
     });
-}
+};
+
+const findPhotoByKey = (key) => {
+    let params = {
+        Bucket: BUCKET_NAME,
+        Key: key
+    };
+
+    s3.getObject(params, (err, data) => {
+        if (err) {
+            console.log("Error", err);
+        }
+
+        if (data) {
+            console.log("Get: ", data.Location);
+        }
+    });
+};
+
+const deletePhotoByKey = (key) => {
+    let params = {
+        Bucket: BUCKET_NAME,
+        Key: key
+    };
+
+    s3.deleteObject(params, (err, data) => {
+        if (err) {
+            console.log("Error", err);
+        }
+
+        if (data) {
+            console.log("Deleted: ", data.Location);
+        }
+    });
+};
 
 module.exports = {
-    uploadFile
+    uploadPhoto,
+    findPhotoByKey,
+    deletePhotoByKey
 }
