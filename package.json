@@ -1,0 +1,29 @@
+{
+  "name": "supermarket-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PabloFelipeRG/supermarket-backend.git"
+  },
+  "author": "Pablo Gonçalves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PabloFelipeRG/supermarket-backend/issues"
+  },
+  "homepage": "https://github.com/PabloFelipeRG/supermarket-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.6",
+    "npm": "^6.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
