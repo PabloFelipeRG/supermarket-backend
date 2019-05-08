@@ -5,8 +5,7 @@ const superMarketSchema = () => {
     let superMarket = Schema({
         name: { type: String, required: true },
         description: { type: String, required: true },
-        location: { type: String, required: true },
-        photo: { type: String }
+        location: { type: String, required: true }
     });
     return mongoose.model('supermarkets', superMarket, 'SuperMarkets');
 }

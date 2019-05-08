@@ -9,10 +9,14 @@ AWS.config.update({
 const s3 = new AWS.S3();
 
 const uploadPhoto = (file, superMarketId) => {
+    let buff = new Buffer.from(file, 'base64');
+
     let params = {
         Bucket: BUCKET_NAME,
-        Body: file,
-        Key: `${superMarketId}`
+        Body: buff,
+        Key: `${superMarketId}`,
+        ContentEncoding: 'base64',
+        ContentType: 'image/jpeg'
     };
 
     s3.upload(params, (err, data) => {
@@ -22,23 +26,6 @@ const uploadPhoto = (file, superMarketId) => {
 
         if (data) {
             console.log("Uploaded in:", data.Location);
-        }
-    });
-};
-
-const findPhotoByKey = (key) => {
-    let params = {
-        Bucket: BUCKET_NAME,
-        Key: key
-    };
-
-    s3.getObject(params, (err, data) => {
-        if (err) {
-            console.log("Error", err);
-        }
-
-        if (data) {
-            console.log("Get: ", data.Location);
         }
     });
 };
@@ -55,13 +42,12 @@ const deletePhotoByKey = (key) => {
         }
 
         if (data) {
-            console.log("Deleted: ", data.Location);
+            console.log("Deleted: ", data);
         }
     });
 };
 
 module.exports = {
     uploadPhoto,
-    findPhotoByKey,
     deletePhotoByKey
 }

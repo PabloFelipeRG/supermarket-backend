@@ -1,11 +1,13 @@
 // Server Configuration and DB Connection
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
 const { DB_PASSWORD } = require("./global");
 const supermarkets = require('./controllers/supermarkets');
 
-app.use(express.json());
+app.use(cors());
+app.use(express.json({limit: '50mb'}));
 
 mongoose.connect(`mongodb+srv://Application:${DB_PASSWORD}@cluster0-zsiku.mongodb.net/Development?retryWrites=true`, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -20,7 +22,7 @@ app.post('/supermarket', supermarkets.createSuperMarket);
 
 app.get('/supermarkets', supermarkets.findSuperMarkets);
 
-app.get('/supermarket', supermarkets.findSuperMarketById);
+app.get('/supermarket/:id', supermarkets.findSuperMarketById);
 
 app.put('/supermarket', supermarkets.updateSuperMarket);
 
